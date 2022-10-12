@@ -66,11 +66,10 @@ const getAllProducts = async (req, res) => {
     const limit = req.query.limit || 10;
     const page = req.query.page || 1;
     const skip = (page - 1) * limit;
-
     result.skip(skip).limit(limit);
 
     let products = await result;
-    res.status(200).json({nbHits: products.length, products})
+    res.status(200).json(products)
     
     // await the promise 
 

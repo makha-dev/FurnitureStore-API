@@ -4,6 +4,8 @@ require('express-async-errors');
 const express = require('express');
 const app = express();
 
+const cors = require('cors');
+app.use(cors());
 // DB connection
 
 const connectDB = require('./db/connect');
