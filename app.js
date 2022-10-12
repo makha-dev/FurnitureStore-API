@@ -13,11 +13,13 @@ const connectDB = require('./db/connect');
 // router
 
 const productsRouter = require('./routes/products');
+const singleProductRouter = require('./routes/singleProduct');
 
 // middleware 
 
 const notFoundMiddleware = require('./middleware/not-found');
 const errorMiddleware = require('./middleware/error-handler');
+const { getSingleProduct } = require('./controllers/singleProduct');
 
 // home route
 
@@ -29,7 +31,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/products', productsRouter);
 
-// if not found or something went wrong
+// if not found or something go wrong
 
 app.use([notFoundMiddleware, errorMiddleware]);
 

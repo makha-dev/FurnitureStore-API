@@ -1,11 +1,16 @@
 const Product = require('../models/product');
+const { getSingleProduct } = require('./singleProduct');
 
 const getAllProducts = async (req, res) => {
+    if(req.query.id){
+        getSingleProduct(req, res);
+        return;
+    }
     const {name, featured, price, sort, fields, numericFilters, company} = req.query;
     const queryObject = {};
-    // check name, company, featured, numericFilters
-    
 
+
+    // check name, company, featured, numericFilters
     if(name){
         queryObject.name = {
             $regex: name,
@@ -62,11 +67,10 @@ const getAllProducts = async (req, res) => {
     }
     // limit
     // skip
-
-    const limit = req.query.limit || 10;
-    const page = req.query.page || 1;
-    const skip = (page - 1) * limit;
-    result.skip(skip).limit(limit);
+    // const limit = req.query.limit || 10;
+    // const page = req.query.page || 1;
+    // const skip = (page - 1) * limit;
+    // result.skip(skip).limit(limit);
 
     let products = await result;
     res.status(200).json(products)
